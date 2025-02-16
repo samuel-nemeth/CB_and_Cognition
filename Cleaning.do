@@ -14,10 +14,9 @@ Author: 		Sam Nemeth (Created on: 12/12/24)
 Last updated:	12/12/2024 (Sam Nemeth) 
 	
 Project description: 
-Examining social connectedness at various time points
-across the life course and how that influences cognition 
-in later life. 
 
+Examining the effect of sense of community belonging at various time points
+across the life course on cognitive function in later life. 
 
 */
 
@@ -193,6 +192,7 @@ label define 	region 1 "South" ///
 					   4 "West" ///
 					   5 "Forign Born"
 label values 	region region 
+label variable 	region "Birth region"
 
 **				Mariatal Status 
 
@@ -299,6 +299,7 @@ generate 		weight1416m = .
 	replace 	weight1416m = 1 if mi(OWGTR) & EFTFASSIGN==1
 	replace 	weight1416m = 1 if PWGTR==0  & EFTFASSIGN==2
 	replace 	weight1416m = 1 if mi(PWGTR) & EFTFASSIGN==2
+label variable 	weight1416m "2014/2016 Half sample weights"
 
 **				Participated in the LHMS 
 
@@ -353,19 +354,23 @@ label values 	BH BH
 ******************************************************
 
 drop R14TR20 R14TR20W R14SER7 R14BWC20 R14BWC20W /// 2018 cognitive function
-	 LH10 LH21 OLB020A PLB020A /// Key independent variables
-	 R13TR20 R13SER7 R13BWC20 /// 2016 cognitive function 
-	 r12agey_b r13agey_b /// Age in 2014/2016
+	 recall_8 recallweb_8 totcounting_8 totrecall_8 /// 2018 cognitive function
+	 countingweb_8 counting_8 serial_8 /// 2018 cognitive function
+	 LH10 LH21 OLB020A PLB020A LHpart14 LHpart16 /// Key independent variables
+	 R13TR20 R13SER7 R13BWC20 recall_7 serial_7 /// 2016 cognitive function 
+	 counting_7 /// 2016 cognitive function 
+	 r12agey_b r13agey_b age2014 age2016 /// Age in 2014/2016
 	 ragender /// Gender 
 	 raracem rahispan /// Race and ethnicity 
 	 rabplace /// Region of birth 
-	 r12mstat r13mstat /// Mariatal status 2014/2016 
+	 r12mstat r13mstat marstat6 married6 marstat7 /// Mariatal status 2014/2016 
+	 married7 /// Mariatal status 2014/2016 
 	 raedyrs /// Education 
-	 h12atotb h13atotb /// Wealth 2014/2016 
+	 h12atotb h13atotb wealth1416 /// Wealth 2014/2016 
 	 r12cesd r13cesd /// Depressive symptoms 2014/2016 
 	 QIWMODE /// Web interview 
 	 PIWLANG /// Interview language 
-	 OWGTR PWGTR /// 2014/2016 half-sample weights 
+	 PWGTR /// 2014/2016 half-sample weights 
 	 LHMSWIND /// Participated in LHMS 
 	 EFTFASSIGN /// Half-sample assignment
 	 
